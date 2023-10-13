@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter import font
 
 from menu import Menu
-import theme
+import helper
 
 def main():
     root = Tk()
@@ -18,14 +18,14 @@ class MainWindow:
         self.master = master
         self.master.title("HOSPITAL MANAGEMENT SYSTEM")
         self.master.geometry("800x500+0+0")
-        self.master.config(bg=theme.bg)
-        self.frame = Frame(self.master,bg=theme.bg)
+        self.master.config(bg=helper.bg)
+        self.frame = Frame(self.master,bg=helper.bg)
         self.frame.pack()
 
         self.Username = StringVar()
         self.Password = StringVar()
 
-        self.lblTitle = Label(self.frame,text = "HOSPITAL MANAGEMENT SYSTEM", font="Helvetica 20 bold",bg=theme.bg,fg="black")
+        self.lblTitle = Label(self.frame,text = "HOSPITAL MANAGEMENT SYSTEM", font="Helvetica 20 bold",bg=helper.bg,fg="black")
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=40)
         #======================
         self.LoginFrame1 = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
