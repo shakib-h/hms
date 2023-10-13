@@ -2,8 +2,10 @@ from tkinter import *
 import tkinter.messagebox
 from tkinter import ttk
 from tkinter import font
-import sqlite3
-conn=sqlite3.connect("HospitalDB.db")
+import mysql.connector
+import helper
+
+conn = mysql.connector.connect(**helper.db_config)
 
 #Class for ROOM ALLOCATION    
 class Room:
@@ -13,8 +15,8 @@ class Room:
         self.master = master
         self.master.title("HOSPITAL MANAGEMENT SYSTEM")
         self.master.geometry("1500x700+0+0")
-        self.master.config(bg="cadet blue")
-        self.frame = Frame(self.master,bg="cadet blue")
+        self.master.config(bg=helper.bg)
+        self.frame = Frame(self.master,bg=helper.bg)
         self.frame.pack()
 
         #=============ATTRIBUTES===========
@@ -26,52 +28,52 @@ class Room:
         self.dd=StringVar()
       
         #===============TITLE==========
-        self.lblTitle = Label(self.frame,text = "ROOM ALLOCATION FORM", font="Helvetica 20 bold",bg="cadet blue")
+        self.lblTitle = Label(self.frame,text = "ROOM ALLOCATION FORM", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=50)
         #==============FRAME==========
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
         
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         #===========LABELS=============          
-        self.lblpatid = Label(self.LoginFrame,text="PATIENT ID",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblpatid = Label(self.LoginFrame,text="PATIENT ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblpatid.grid(row=0,column=0)
         self.lblpatid  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.P_id)
         self.lblpatid.grid(row=0,column=1)
-        self.room_t1= Label(self.LoginFrame,text="ROOM TYPE\nSINGLE ROOM: Rs 4500\nTWIN SHARING : Rs2500\nTRIPLE SHARING: Rs2000\n",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.room_t1= Label(self.LoginFrame,text="ROOM TYPE\nSINGLE ROOM: Rs 4500\nTWIN SHARING : Rs2500\nTRIPLE SHARING: Rs2000\n",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.room_t1.grid(row=1,column=0)
         self.room_t1 = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.room_t)
         self.room_t1.grid(row=1,column=1)
         
-        self.room_no1=Label(self.LoginFrame,text="ROOM NUMBER ",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.room_no1=Label(self.LoginFrame,text="ROOM NUMBER ",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.room_no1.grid(row=2,column=0)
 
         self.room_no1 = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.room_no)
         self.room_no1.grid(row=2,column=1)
-        self.lblrate=Label(self.LoginFrame,text="ROOM CHARGES",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblrate=Label(self.LoginFrame,text="ROOM CHARGES",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblrate.grid(row=0,column=2)
         self.lblrate=Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.rate)
         self.lblrate.grid(row=0,column=3)
-        self.lblda=Label(self.LoginFrame,text="DATE ADMITTED",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblda=Label(self.LoginFrame,text="DATE ADMITTED",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblda.grid(row=1,column=2)
         self.lblda=Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.da)
         self.lblda.grid(row=1,column=3)
-        self.lbldd=Label(self.LoginFrame,text="DATE DISCHARGED",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lbldd=Label(self.LoginFrame,text="DATE DISCHARGED",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lbldd.grid(row=2,column=2)
         self.lbldd=Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.dd)
         self.lbldd.grid(row=2,column=3)
         #===========BUTTONS============= 
-        self.button2 = Button(self.LoginFrame2, text="SUBMIT",width =10,font="Helvetica 14 bold",bg="cadet blue",command=self.INSERT_ROOM)
+        self.button2 = Button(self.LoginFrame2, text="SUBMIT",width =10,font="Helvetica 14 bold",bg=helper.bg,command=self.INSERT_ROOM)
         self.button2.grid(row=3,column=1)
         
-        self.button3 = Button(self.LoginFrame2, text="UPDATE",width =10,font="Helvetica 14 bold",bg="cadet blue",command=self.UPDATE_ROOM)
+        self.button3 = Button(self.LoginFrame2, text="UPDATE",width =10,font="Helvetica 14 bold",bg=helper.bg,command=self.UPDATE_ROOM)
         self.button3.grid(row=3,column=2)
         
-        self.button5 = Button(self.LoginFrame2, text="ROOM DETAILS",width =15,font="Helvetica 14 bold",bg="cadet blue",command=self.SEARCH_ROOM)
+        self.button5 = Button(self.LoginFrame2, text="ROOM DETAILS",width =15,font="Helvetica 14 bold",bg=helper.bg,command=self.SEARCH_ROOM)
         self.button5.grid(row=3,column=4)
         
-        self.button6 = Button(self.LoginFrame2, text="EXIT",width =10,font="Helvetica 14 bold",bg="cadet blue",command = self.Exit)
+        self.button6 = Button(self.LoginFrame2, text="EXIT",width =10,font="Helvetica 14 bold",bg=helper.bg,command = self.Exit)
         self.button6.grid(row=3,column=5)
         
     #FUNCTION TO INSERT DATA IN ROOM ALLOCATION FORM
@@ -128,25 +130,25 @@ class S_Room:
         self.master = master
         self.master.title("HOSPITAL MANAGEMENT SYSTEM")
         self.master.geometry("1500x700+0+0")
-        self.master.config(bg="cadet blue")
-        self.frame = Frame(self.master,bg="cadet blue")
+        self.master.config(bg=helper.bg)
+        self.frame = Frame(self.master,bg=helper.bg)
         self.frame.pack()
         self.Pr_id=IntVar()
-        self.lblTitle = Label(self.frame,text = "SEARCH PATIENT DETAILS", font="Helvetica 20 bold",bg="cadet blue")
+        self.lblTitle = Label(self.frame,text = "SEARCH PATIENT DETAILS", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=25)
         #==============FRAME==========
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         
         #===========LABELS=============          
-        self.lblpatid = Label(self.LoginFrame,text="ENTER PATIENT ID TO SEARCH",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblpatid = Label(self.LoginFrame,text="ENTER PATIENT ID TO SEARCH",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblpatid.grid(row=0,column=0)
         self.lblpatid= Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.Pr_id)
         self.lblpatid.grid(row=0,column=1)
 
-        self.SearchB = Button(self.LoginFrame2, text="SEARCH",width =10,font="Helvetica 14 bold",bg="cadet blue",command = self.ROOM_DISPLAY)
+        self.SearchB = Button(self.LoginFrame2, text="SEARCH",width =10,font="Helvetica 14 bold",bg=helper.bg,command = self.ROOM_DISPLAY)
         self.SearchB.grid(row=0,column=1)    
 
     #FUNCTION TO SEARCH DATA IN ROOM ALLOCATION FORM
@@ -162,24 +164,24 @@ class S_Room:
             t=c1.execute('SELECT PATIENT_ID,NAME,ROOM_NO,ROOM_TYPE FROM ROOM NATURAL JOIN PATIENT where PATIENT_ID=?',(pat_rm,));
             for i in t:
             
-                self.l1 = Label(self.LoginFrame,text="PATIENT ID",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+                self.l1 = Label(self.LoginFrame,text="PATIENT ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)
                 self.l1.grid(row=1,column=0)
-                self.dis1= Label(self.LoginFrame,font="Helvetica 14 bold",bd=2,bg="cadet blue",text=i[0])
+                self.dis1= Label(self.LoginFrame,font="Helvetica 14 bold",bd=2,bg=helper.bg,text=i[0])
                 self.dis1.grid(row=1,column=1)
                         
-                self.l2 = Label(self.LoginFrame,text="PATIENT NAME",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+                self.l2 = Label(self.LoginFrame,text="PATIENT NAME",font="Helvetica 14 bold",bg=helper.bg,bd=22)
                 self.l2.grid(row=2,column=0)
-                self.dis2=Label(self.LoginFrame,font="Helvetica 14 bold",bd=2,bg="cadet blue",text=i[1])
+                self.dis2=Label(self.LoginFrame,font="Helvetica 14 bold",bd=2,bg=helper.bg,text=i[1])
                 self.dis2.grid(row=2,column=1)
 
-                self.l3 = Label(self.LoginFrame,text="ROOM NO",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+                self.l3 = Label(self.LoginFrame,text="ROOM NO",font="Helvetica 14 bold",bg=helper.bg,bd=22)
                 self.l3.grid(row=1,column=2)
-                self.dis3= Label(self.LoginFrame,font="Helvetica 14 bold",bg="cadet blue",bd=2,text=i[2])
+                self.dis3= Label(self.LoginFrame,font="Helvetica 14 bold",bg=helper.bg,bd=2,text=i[2])
                 self.dis3.grid(row=1,column=3)
 
-                self.l4 = Label(self.LoginFrame,text="ROOM TYPE",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+                self.l4 = Label(self.LoginFrame,text="ROOM TYPE",font="Helvetica 14 bold",bg=helper.bg,bd=22)
                 self.l4.grid(row=2,column=2)
-                self.dis4= Label(self.LoginFrame,font="Helvetica 14 bold",bg="cadet blue",bd=2,text=i[3])
+                self.dis4= Label(self.LoginFrame,font="Helvetica 14 bold",bg=helper.bg,bd=2,text=i[3])
                 self.dis4.grid(row=2,column=3)                 
                        
 

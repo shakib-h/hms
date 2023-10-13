@@ -2,10 +2,10 @@ from tkinter import *
 import tkinter.messagebox
 from tkinter import ttk
 from tkinter import font
-import sqlite3
+import mysql.connector
+import helper
 
-
-conn=sqlite3.connect("HospitalDB.db")
+conn = mysql.connector.connect(**helper.db_config)
 print("DATABASE CONNECTION SUCCESSFUL")
 
 #Class for EMPLOYEE REGISTRATION 
@@ -14,8 +14,8 @@ class Employee:
         self.master = master
         self.master.title("HOSPITAL MANAGEMENT SYSTEM")
         self.master.geometry("1500x700+0+0")
-        self.master.config(bg="cadet blue")
-        self.frame = Frame(self.master,bg="cadet blue")
+        self.master.config(bg=helper.bg)
+        self.frame = Frame(self.master,bg=helper.bg)
         self.frame.pack()
 
         #=============ATTRIBUTES===========
@@ -32,68 +32,68 @@ class Employee:
 
 
         #===============TITLE==========
-        self.lblTitle = Label(self.frame,text = "EMPLOYEE REGISTRATION FORM", font="Helvetica 20 bold",bg="cadet blue")
+        self.lblTitle = Label(self.frame,text = "EMPLOYEE REGISTRATION FORM", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=50)
         #==============FRAME==========
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
         
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         #===========LABELS=============          
-        self.lblempid = Label(self.LoginFrame,text="EMPLOYEE ID",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblempid = Label(self.LoginFrame,text="EMPLOYEE ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblempid.grid(row=0,column=0)
         self.lblempid  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_ID)
         self.lblempid.grid(row=0,column=1)
         
-        self.lblempname = Label(self.LoginFrame,text="EMPLOYEE NAME",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblempname = Label(self.LoginFrame,text="EMPLOYEE NAME",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblempname.grid(row=1,column=0)
         self.lblempname  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_name)
         self.lblempname.grid(row=1,column=1)
 
-        self.lblsex = Label(self.LoginFrame,text="SEX",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblsex = Label(self.LoginFrame,text="SEX",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblsex.grid(row=2,column=0)
         self.etype1 =Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_sex)
         self.etype1.grid(row=2,column=1)
         
 
-        self.lblage = Label(self.LoginFrame,text="AGE",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblage = Label(self.LoginFrame,text="AGE",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblage.grid(row=3,column=0)
         self.lblage  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_age)
         self.lblage.grid(row=3,column=1)
         
-        self.etype1=Label(self.LoginFrame,text="EMPLOYEE DESIGNATION",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.etype1=Label(self.LoginFrame,text="EMPLOYEE DESIGNATION",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.etype1.grid(row=4,column=0)
         self.etype1 =Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_type)
         self.etype1.grid(row=4,column=1)
 
-        self.lblCon = Label(self.LoginFrame,text="SALARY",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblCon = Label(self.LoginFrame,text="SALARY",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblCon.grid(row=0,column=2)
         self.lblCon  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_salary)
         self.lblCon.grid(row=0,column=3)
         
-        self.lblAlt = Label(self.LoginFrame,text="EXPERIENCE",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblAlt = Label(self.LoginFrame,text="EXPERIENCE",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblAlt.grid(row=1,column=2)
         self.lblAlt  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_exp)
         self.lblAlt.grid(row=1,column=3)
         
-        self.lbleid = Label(self.LoginFrame,text="CONTACT NUMBER",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lbleid = Label(self.LoginFrame,text="CONTACT NUMBER",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lbleid.grid(row=2,column=2)
         self.lbleid  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_phno)
         self.lbleid.grid(row=2,column=3)
         
-        self.lbleid = Label(self.LoginFrame,text="EMAIL",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lbleid = Label(self.LoginFrame,text="EMAIL",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lbleid.grid(row=3,column=2)
         self.lbleid  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_email)
         self.lbleid.grid(row=3,column=3)
 
-        self.button2 = Button(self.LoginFrame2, text="SAVE",width =10,font="Helvetica 14 bold",bg="cadet blue",command = self.INSERT_EMP)
+        self.button2 = Button(self.LoginFrame2, text="SAVE",width =10,font="Helvetica 14 bold",bg=helper.bg,command = self.INSERT_EMP)
         self.button2.grid(row=3,column=1)
         
-        self.button3 = Button(self.LoginFrame2, text="DELETE",width =10,font="Helvetica 14 bold",bg="cadet blue",command= self.DE_DISPLAY)
+        self.button3 = Button(self.LoginFrame2, text="DELETE",width =10,font="Helvetica 14 bold",bg=helper.bg,command= self.DE_DISPLAY)
         self.button3.grid(row=3,column=2)
      
-        self.button6 = Button(self.LoginFrame2, text="EXIT",width =10,font="Helvetica 14 bold",bg="cadet blue",command = self.Exit)
+        self.button6 = Button(self.LoginFrame2, text="EXIT",width =10,font="Helvetica 14 bold",bg=helper.bg,command = self.Exit)
         self.button6.grid(row=3,column=3)
         
 
@@ -137,24 +137,24 @@ class D_EMP:
         self.master = master
         self.master.title("HOSPITAL MANAGEMENT SYSTEM")
         self.master.geometry("1500x700+0+0")
-        self.master.config(bg="cadet blue")
-        self.frame = Frame(self.master,bg="cadet blue")
+        self.master.config(bg=helper.bg)
+        self.frame = Frame(self.master,bg=helper.bg)
         self.frame.pack()
         self.de1_emp=StringVar()
-        self.lblTitle = Label(self.frame,text = "DELETE EMPLOYEE WINDOW", font="Helvetica 20 bold",bg="cadet blue")
+        self.lblTitle = Label(self.frame,text = "DELETE EMPLOYEE WINDOW", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=50)
         #==============FRAME==========
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         #===========LABELS=============          
-        self.lblpatid = Label(self.LoginFrame,text="ENTER EMPLOYEE ID TO DELETE",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblpatid = Label(self.LoginFrame,text="ENTER EMPLOYEE ID TO DELETE",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblpatid.grid(row=0,column=0)
         self.lblpatid= Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.de1_emp)
         self.lblpatid.grid(row=0,column=1)
 
-        self.DeleteB = Button(self.LoginFrame2, text="DELETE",width =10,font="Helvetica 14 bold",bg="cadet blue",command = self.DELETE_EMP)
+        self.DeleteB = Button(self.LoginFrame2, text="DELETE",width =10,font="Helvetica 14 bold",bg=helper.bg,command = self.DELETE_EMP)
         self.DeleteB.grid(row=3,column=1)
         
     #FUNCTION TO DELETE DATA IN EMPLOYEE FORM 

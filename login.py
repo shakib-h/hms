@@ -28,23 +28,23 @@ class MainWindow:
         self.lblTitle = Label(self.frame,text = "HOSPITAL MANAGEMENT SYSTEM", font="Helvetica 20 bold",bg=helper.bg,fg="black")
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=40)
         #======================
-        self.LoginFrame1 = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame1 = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame1.grid(row=1,column=0)
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg="cadet blue",bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         #======LABEL AND ENTRY=========
-        self.lblUsername = Label(self.LoginFrame1,text="Username",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblUsername = Label(self.LoginFrame1,text="Username",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblUsername.grid(row=0,column=0)
         self.lblUsername = Entry(self.LoginFrame1,font="Helvetica 14 bold",textvariable= self.Username,bd=2)
         self.lblUsername.grid(row=0,column=1)
-        self.lblPassword = Label(self.LoginFrame1,text="Password ",font="Helvetica 14 bold",bg="cadet blue",bd=22)
+        self.lblPassword = Label(self.LoginFrame1,text="Password ",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblPassword .grid(row=1,column=0)
         self.lblPassword  = Entry(self.LoginFrame1,font="Helvetica 14 bold",show="*",textvariable= self.Password,bd=2)
         self.lblPassword .grid(row=1,column=1)
         #===========BUTTONS====
-        self.btnLogin = Button(self.LoginFrame2,text = "Login" ,font="Helvetica 10 bold", width =10 ,bg="powder blue",command = self.Login_system)
+        self.btnLogin = Button(self.LoginFrame2,text = "Login" ,font="Helvetica 10 bold", width =10 ,bg=helper.accent,command = self.Login_system)
         self.btnLogin.grid(row=3,column=0)
-        self.btnExit = Button(self.LoginFrame2,text = "Exit" ,font="Helvetica 10 bold", width =10 ,bg="powder blue",command = self.Exit)
+        self.btnExit = Button(self.LoginFrame2,text = "Exit" ,font="Helvetica 10 bold", width =10 ,bg=helper.accent,command = self.Exit)
         self.btnExit.grid(row=3,column=1)
     # public member function  
     #Function for LOGIN

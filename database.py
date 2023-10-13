@@ -1,92 +1,115 @@
-import sqlite3
-conn=sqlite3.connect("HospitalDB.db")
+import mysql.connector
+
+db_config = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': '',
+    'database': 'hms',
+}
+
+conn = mysql.connector.connect(**db_config)
 
 print("DATABASE CONNECTION SUCCESSFUL")
-conn.execute("Drop table if EXISTS PATIENT")
+# Define cursor
 c = conn.cursor()
-conn.execute("""Create table PATIENT
-           (PATIENT_ID int(10) primary key,
-            NAME VARCHAR(20) not null,
-            SEX varchar(10) not null,
-            BLOOD_GROUP varchar(5) not null,
-            DOB date not null,
-            ADDRESS varchar(100) not null,
-            CONSULT_TEAM varchar(50) not null,
-            EMAIL varchar(20) not null
-            )""")
-print("PATIENT TABLE CREATED SUCCESSFULLY")         
-conn.execute("Drop table if EXISTS CONTACT_NO")
-c = conn.cursor()
-conn.execute("""CREATE TABLE CONTACT_NO
-           (PATIENT_ID int(10) PRIMARY KEY,
-            CONTACTNO int(15) not null,
-            ALT_CONTACT int(15),
-            FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID))
-           """)
+
+# Drop tables if they exist
+c.execute("DROP TABLE IF EXISTS PATIENT")
+c.execute("DROP TABLE IF EXISTS CONTACT_NO")
+c.execute("DROP TABLE IF EXISTS employee")
+c.execute("DROP TABLE IF EXISTS TREATMENT")
+c.execute("DROP TABLE IF EXISTS MEDICINE")
+c.execute("DROP TABLE IF EXISTS ROOM")
+c.execute("DROP TABLE IF EXISTS APPOINTMENT")
+
+# Create PATIENT table
+c.execute("""CREATE TABLE PATIENT (
+    PATIENT_ID INT(10) PRIMARY KEY,
+    NAME VARCHAR(20) NOT NULL,
+    SEX VARCHAR(10) NOT NULL,
+    BLOOD_GROUP VARCHAR(5) NOT NULL,
+    DOB DATE NOT NULL,
+    ADDRESS VARCHAR(100) NOT NULL,
+    CONSULT_TEAM VARCHAR(50) NOT NULL,
+    EMAIL VARCHAR(20) NOT NULL
+)""")
+
+print("PATIENT TABLE CREATED SUCCESSFULLY")
+
+# Create CONTACT_NO table
+c.execute("""CREATE TABLE CONTACT_NO (
+    PATIENT_ID INT(10) PRIMARY KEY,
+    CONTACTNO INT(15) NOT NULL,
+    ALT_CONTACT INT(15),
+    FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID)
+)""")
+
 print("CONTACT_NO TABLE CREATED SUCCESSFULLY")
-conn.execute("Drop table if EXISTS employee")
-c = conn.cursor()
-conn.execute("""create table employee
-           (EMP_ID varchar(10) primary key,
-           EMP_NAME varchar(20)not null,
-            SEX varchar(10) not null,
-            AGE int(5) not null,
-            DESIG varchar(20) not null,
-            SAL int(10) not null,
-         EXP varchar(100) not null,
-            EMAIL varcahr(20) not null,
-           PHONE int(12))""")
+
+# Create employee table
+c.execute("""CREATE TABLE employee (
+    EMP_ID VARCHAR(10) PRIMARY KEY,
+    EMP_NAME VARCHAR(20) NOT NULL,
+    SEX VARCHAR(10) NOT NULL,
+    AGE INT(5) NOT NULL,
+    DESIG VARCHAR(20) NOT NULL,
+    SAL INT(10) NOT NULL,
+    EXP VARCHAR(100) NOT NULL,
+    EMAIL VARCHAR(20) NOT NULL,
+    PHONE INT(12)
+)""")
 
 print("EMPLOYEE TABLE CREATED SUCCESSFULLY")
 
-conn.execute("Drop table if EXISTS TREATMENT")
-c = conn.cursor()
-conn.execute("""CREATE TABLE TREATMENT
-           (PATIENT_ID int(10) primary key,
-            TREATMENT varchar(100) not null,
-            TREATMENT_CODE varchar(30) not null,
-            T_COST int(20) not null,
-           FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID));
-            """)
+# Create TREATMENT table
+c.execute("""CREATE TABLE TREATMENT (
+    PATIENT_ID INT(10) PRIMARY KEY,
+    TREATMENT VARCHAR(100) NOT NULL,
+    TREATMENT_CODE VARCHAR(30) NOT NULL,
+    T_COST INT(20) NOT NULL,
+    FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID)
+)""")
+
 print("TREATMENT TABLE CREATED SUCCESSFULLY")
 
-conn.execute("Drop table if EXISTS MEDICINE")
-c = conn.cursor()
-conn.execute("""CREATE TABLE MEDICINE
-           (PATIENT_ID int(10) primary key,
-            MEDICINE_NAME varchar(100) not null,
-            M_COST int(20) not null,
-            M_QTY int(10) not null,
-            FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID));
-            """)
+# Create MEDICINE table
+c.execute("""CREATE TABLE MEDICINE (
+    PATIENT_ID INT(10) PRIMARY KEY,
+    MEDICINE_NAME VARCHAR(100) NOT NULL,
+    M_COST INT(20) NOT NULL,
+    M_QTY INT(10) NOT NULL,
+    FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID)
+)""")
+
 print("MEDICINE TABLE CREATED SUCCESSFULLY")
 
-conn.execute("Drop table if EXISTS ROOM")
-c = conn.cursor()
-conn.execute("""Create table ROOM
-         (PATIENT_ID int(10)not NULL ,
-           ROOM_NO varchar(20) PRIMARY KEY ,
-          ROOM_TYPE varchar(10) not null,
-           RATE int(10) not null,
-           DATE_ADMITTED date,
-            DATE_DISCHARGED date NULL,
-           FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID)
-            );
-           """)
+# Create ROOM table
+c.execute("""CREATE TABLE ROOM (
+    PATIENT_ID INT(10) NOT NULL,
+    ROOM_NO VARCHAR(20) PRIMARY KEY,
+    ROOM_TYPE VARCHAR(10) NOT NULL,
+    RATE INT(10) NOT NULL,
+    DATE_ADMITTED DATE,
+    DATE_DISCHARGED DATE NULL,
+    FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID)
+)""")
+
 print("ROOM TABLE CREATED SUCCESSFULLY")
 
-conn.execute("Drop table if EXISTS APPOINTMENT")
-c = conn.cursor()
-c.execute("""create table appointment
-            (
-             PATIENT_ID int(20) not null,
-             EMP_ID varchar(10) not null,
-             AP_NO varchar(10) primary key,
-             AP_TIME time,
-             AP_DATE date,
-             description varchar(100),
-             FOREIGN KEY(PATIENT_ID) references PATIENT(PATIENT_ID),
-             FOREIGN KEY(EMP_ID) references employee(EMP_ID));""")
+# Create APPOINTMENT table
+c.execute("""CREATE TABLE APPOINTMENT (
+    PATIENT_ID INT(20) NOT NULL,
+    EMP_ID VARCHAR(10) NOT NULL,
+    AP_NO VARCHAR(10) PRIMARY KEY,
+    AP_TIME TIME,
+    AP_DATE DATE,
+    DESCRIPTION VARCHAR(100),
+    FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID),
+    FOREIGN KEY(EMP_ID) REFERENCES employee(EMP_ID)
+)""")
+
 print("APPOINTMENT TABLE CREATED SUCCESSFULLY")
+
+# Commit changes and close connection
 conn.commit()
 conn.close()
