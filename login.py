@@ -9,7 +9,7 @@ import helper
 def main():
     root = Tk()
     app= MainWindow(root)
-    root.mainloop()
+    app.mainloop()
 #MAIN WINDOW FOR LOG IN
 class MainWindow:
     # constructor

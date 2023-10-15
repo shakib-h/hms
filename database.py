@@ -1,17 +1,19 @@
 import mysql.connector
-
-db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
-    'database': 'hms',
-}
-
-conn = mysql.connector.connect(**db_config)
+import helper
+conn = mysql.connector.connect(**helper.db_config)
 
 print("DATABASE CONNECTION SUCCESSFUL")
 # Define cursor
 c = conn.cursor()
+
+# Create database
+c.execute("CREATE DATABASE IF NOT EXISTS hms")
+
+# Use database
+c.execute("USE hms")
+
+# Temporarily disable foreign key checks
+c.execute("SET FOREIGN_KEY_CHECKS = 0")
 
 # Drop tables if they exist
 c.execute("DROP TABLE IF EXISTS PATIENT")
@@ -22,6 +24,9 @@ c.execute("DROP TABLE IF EXISTS MEDICINE")
 c.execute("DROP TABLE IF EXISTS ROOM")
 c.execute("DROP TABLE IF EXISTS APPOINTMENT")
 
+# Re-enable foreign key checks
+c.execute("SET FOREIGN_KEY_CHECKS = 1")
+
 # Create PATIENT table
 c.execute("""CREATE TABLE PATIENT (
     PATIENT_ID INT(10) PRIMARY KEY,
@@ -31,7 +36,9 @@ c.execute("""CREATE TABLE PATIENT (
     DOB DATE NOT NULL,
     ADDRESS VARCHAR(100) NOT NULL,
     CONSULT_TEAM VARCHAR(50) NOT NULL,
-    EMAIL VARCHAR(20) NOT NULL
+    EMAIL VARCHAR(20) NOT NULL,
+    PHONE VARCHAR(12) NOT NULL,
+    ALT_PHONE VARCHAR(12)
 )""")
 
 print("PATIENT TABLE CREATED SUCCESSFULLY")
