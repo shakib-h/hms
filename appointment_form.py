@@ -7,6 +7,8 @@ import helper
 
 conn = mysql.connector.connect(**helper.db_config)
 print("DATABASE CONNECTION SUCCESSFUL")
+# Use database
+
 
 #Class for BOOKING APPOINTMENT   
 class Appointment:
@@ -88,20 +90,22 @@ class Appointment:
         
     #FUNCTION TO INSERT DATA IN APPOINTMENT FORM   
     def INSERT_AP(self):
-        global e1,e2,e3,e4,e5,e6,var
+        global conn,e1,e2,e3,e4,e5,e6,var
         e1=(self.pat_ID.get())
         e2=(self.emp_ID.get())
         e3=(self.ap_no.get())
         e4=(self.ap_time.get())
         e5=(self.ap_date.get())
         e6=(self.des.get())
-        conn = sqlite3.connect("HospitalDB.db")
-        p = list(conn.execute("SELECT * FROM appointment WHERE AP_NO =?",(e3,)))
-        x=len(p)
-        if x!=0:
+        cursor= conn.cursor()
+           # Use database
+        cursor.execute("USE hms")  
+        cursor.execute("SELECT * FROM appointment WHERE AP_NO =%s",(e3,))
+        result= cursor.fetchone()
+        if  result is not None:
              tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM", "APPOINTMENT ALREADY EXISTS")     
         else:
-            conn.execute("Insert into appointment values(?,?,?,?,?,?)",(e1,e2,e3,e4,e5,e6,))
+            cursor.execute("Insert into appointment values( %s, %s, %s, %s, %s, %s)",(e1,e2,e3,e4,e5,e6,))
             tkinter.messagebox.showinfo("Hospital DATABASE SYSTEM", "APPOINTMENT SET SUCCSESSFULLY")
         conn.commit()
 

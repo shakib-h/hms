@@ -79,7 +79,7 @@ class Room:
     #FUNCTION TO INSERT DATA IN ROOM ALLOCATION FORM
     def INSERT_ROOM(self):
         global r1,r2,r3,r4,r5,r6,conn,p
-        conn = sqlite3.connect("HospitalDB.db")
+        
         conn.cursor()
         r1=(self.P_id.get())
         r2=(self.room_t.get())
@@ -87,12 +87,17 @@ class Room:
         r4=(self.rate.get())
         r5=(self.da.get())
         r6=(self.dd.get())
-        p = list(conn.execute("SELECT * FROM ROOM WHERE ROOM_NO=?",(r3,)))
-        x=len(p)
-        if x!=0:
+        cursor = conn.cursor()  
+          # Use database
+        cursor.execute("USE hms")  
+        cursor.execute("SELECT * FROM ROOM WHERE ROOM_NO=%s",(r3,))
+        
+        result = cursor.fetchone()
+        
+        if  result is not None:
              tkinter.messagebox.showerror("HOSPITAL DATABASE SYSTEM","ROOM_NO IS CURRENTLY OCCUPIED")
         else:
-            conn.execute('INSERT INTO ROOM VALUES(?,?,?,?,?,?)',(r1,r3, r2, r4, r5, r6,))
+            cursor.execute('INSERT INTO ROOM VALUES(%s, %s, %s, %s, %s, %s)',(r1,r3, r2, r4, r5, r6,))
             tkinter.messagebox.showinfo("HOSPITAL DATABSE SYSTEM", "ROOM ALLOCATED")
             conn.commit()
             
@@ -114,12 +119,19 @@ class Room:
         r4=(self.rate.get())
         r5=(self.da.get())
         r6=(self.dd.get())
-        p = list(conn.execute("Select * from ROOM where PATIENT_ID=? AND ROOM_NO=?",(r1,r3,)))
-        if len(p) != 0:
+        cursor = conn.cursor()  
+          # Use database
+        cursor.execute("USE hms")  
+        
+        cursor.execute("Select * from ROOM where PATIENT_ID=%s AND ROOM_NO=%s",(r1,r3,))
+        result = cursor.fetchone()
+        
+        if  result is not None:
+        
             tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM", "PATIENT IS NOT ALLOCATED A ROOM")
 
         else:
-            conn.execute('UPDATE ROOM SET ROOM_NO=?,ROOM_TYPE=?,RATE=?,DATE_ADMITTED=?,DATE_DISCHARGED=? where PATIENT_ID=?',(r3, r2, r4, r5, r6,r1,))
+            cursor.execute('UPDATE ROOM SET ROOM_NO=%s,ROOM_TYPE=%s,RATE=%s,DATE_ADMITTED=%s,DATE_DISCHARGED=%s where PATIENT_ID=%s',(r3, r2, r4, r5, r6,r1,))
             tkinter.messagebox.showinfo("HOSPITAL DATABSE SYSTEM", "ROOM DETAILS UPDATED")
             conn.commit()
 

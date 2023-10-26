@@ -8,6 +8,8 @@ import helper
 conn = mysql.connector.connect(**helper.db_config)
 print("DATABASE CONNECTION SUCCESSFUL")
 
+
+
 #Class for EMPLOYEE REGISTRATION 
 class Employee:
     def __init__(self,master):
@@ -28,7 +30,7 @@ class Employee:
         self.emp_salary=IntVar()
         self.emp_exp=StringVar()
         self.emp_email=StringVar()
-        self.emp_phno=IntVar()
+        self.emp_phno=StringVar()
 
 
         #===============TITLE==========
@@ -104,7 +106,7 @@ class Employee:
     #FUNCTION TO INSERT DATA IN EMPLOYEE FORM
         
     def INSERT_EMP(self):
-        global e1,e2,e3,e4,e5,e6,e7,e8,e9,var
+        global conn, e1,e2,e3,e4,e5,e6,e7,e8,e9,var
         e1=(self.emp_ID.get())
         e2=(self.emp_name.get())
         e3=(self.emp_sex.get())
@@ -114,13 +116,16 @@ class Employee:
         e7=(self.emp_exp.get())
         e8=(self.emp_email.get())
         e9=(self.emp_phno.get())
-        conn = sqlite3.connect("HospitalDB.db")     
-        p = list(conn.execute("SELECT * FROM employee  WHERE EMP_ID =?",(e1,)))
-        x=len(p)
-        if x!=0:
+        cursor = conn.cursor()  
+          # Use database
+        cursor.execute("USE hms")  
+        cursor.execute("SELECT * FROM EMPLOYEE WHERE EMP_ID = %s", (e1,))
+        result = cursor.fetchone()
+        
+        if  result is not None:
              tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM", "EMPLOYEE ID ALREADY EXISTS")     
         else:
-            conn.execute("INSERT INTO employee VALUES(?,?,?,?,?,?,?,?,?)",(e1,e2,e3,e4,e5,e6,e7,e8,e9,))
+            cursor.execute("INSERT INTO employee VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)",(e1,e2,e3,e4,e5,e6,e7,e8,e9,))
             tkinter.messagebox.showinfo("HOSPITAL DATABASE SYSTEM", "EMPLOYEE DATA ADDED")
         conn.commit()
                 

@@ -156,6 +156,8 @@ class Patient:
         p10 = self.pat_email.get()
 
         cursor = conn.cursor()
+        # Use database
+        cursor.execute("USE hms")
 
         # Check if the patient ID already exists
         cursor.execute("SELECT * FROM PATIENT WHERE PATIENT_ID = %s", (p1,))

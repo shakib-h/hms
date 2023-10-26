@@ -7,6 +7,8 @@ import helper
 
 conn = mysql.connector.connect(**helper.db_config)
 print("DATABASE CONNECTION SUCCESSFUL")
+# Use database
+
 
 #Class for BILLING  
 class Billing:
@@ -94,19 +96,21 @@ class Billing:
 
     #FUNCTION TO UPDATE DATE IN BILLING FORM 
     def UPDATE_DATE(self):
-        global b1,b2
-        conn = sqlite3.connect("HospitalDB.db")
+        global conn, b1,b2
+        cursor = conn.cursor()  
+          # Use database
+        cursor.execute("USE hms") 
         conn.cursor()
         b1 = (self.P_id.get())
         b2 =(self.dd.get())  
-        conn.execute("UPDATE ROOM SET DATE_DISCHARGED=? where PATIENT_ID=?", (b2, b1,))
+        cursor.execute("UPDATE ROOM SET DATE_DISCHARGED=%s where PATIENT_ID=%s", (b2, b1,))
         conn.commit()
         tkinter.messagebox.showinfo("HOSPITAL DATABASE SYSTEM", "DISCHARGE DATE UPDATED")
         
     #FUNCTION TO UPDATE DATA IN BILLING FORM 
     def UPDATE_DATA(self):
-        global c1, b1, P_id, b3, b4, b5, b6, dd, treat_1, treat_2, cost_t, b7, b8, med, med_q, price, u
-        conn = sqlite3.connect("HospitalDB.db")
+        global conn, c1, b1, P_id, b3, b4, b5, b6, dd, treat_1, treat_2, cost_t, b7, b8, med, med_q, price, u
+        
         c1 = conn.cursor()
         b1 = (self.P_id.get())
         b3 = (self.treat_1.get())
@@ -114,22 +118,30 @@ class Billing:
         b5 = (self.cost_t.get())
         b6 = (self.med.get())
         b7 = (self.med_q.get())
-        b8 = (self.price.get())   
-        p = list(conn.execute("Select * from TREATMENT where TREATMENT.PATIENT_ID=?", (b1,)))  
-        if len(p) != 0:
+        b8 = (self.price.get())
+        cursor = conn.cursor()  
+          # Use database
+        cursor.execute("USE hms")    
+        cursor.execute("Select * from TREATMENT where TREATMENT.PATIENT_ID=%s", (b1,))
+        result = cursor.fetchone()  
+        
+        if  result is not None:
             tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM", "PATIENT ID IS ALREADY REGISTERED")
         else:
-            conn.execute("INSERT INTO TREATMENT VALUES(?,?,?,?)", (b1, b3, b4, b5,))
-            conn.execute("INSERT INTO MEDICINE VALUES(?,?,?,?)", (b1, b6, b7, b8,))
+            cursor.execute("INSERT INTO TREATMENT VALUES(%s, %s, %s, %s)", (b1, b3, b4, b5,))
+            cursor.execute("INSERT INTO MEDICINE VALUES(%s, %s, %s, %s)", (b1, b6, b7, b8,))
             conn.commit()
             tkinter.messagebox.showinfo("HOSPITAL DATABASE SYSTEM", "BILLING DATA SAVED")
             
     #FUNCTION TO GENERATE BILL IN BILLING FORM 
     def GEN_BILL(self):
-        global b1
+        global conn, b1
         b1 = (self.P_id.get())
-        conn = sqlite3.connect("HospitalDB.db")
-        u=conn.execute("Select sum(T_COST+ (M_COST*M_QTY) +(DATE_DISCHARGED-DATE_ADMITTED)*RATE) FROM ROOM NATURAL JOIN TREATMENT natural JOIN MEDICINE where PATIENT_ID=?",(b1,) )
+        cursor = conn.cursor()  
+          # Use database
+        cursor.execute("USE hms") 
+        cursor.execute("Select sum(T_COST+ (M_COST*M_QTY) +(DATE_DISCHARGED-DATE_ADMITTED)*RATE) FROM ROOM NATURAL JOIN TREATMENT natural JOIN MEDICINE where PATIENT_ID=%s",(b1,) )
+        u= cursor.fetchall()
         for ii in u:
             self.pp=Label(self.LoginFrame,text="TOTAL AMOUNT OUTSTANDING",font="Helvetica 14 bold",bg=helper.bg,bd=22)
             self.pp.grid(row=5,column=0)
