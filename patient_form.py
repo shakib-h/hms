@@ -265,16 +265,23 @@ class DMenu:
 
     # FUNCTION TO DELETE DATA IN PATIENT FORM
     def DELETE_PAT(self):
-        global inp_d, del_pid
-        c1 = conn.cursor()
+        global conn,inp_d, del_pid
         inp_d = (self.del_pid.get())
-        p = list(conn.execute("select * from PATIENT where PATIENT_ID=?", (inp_d,)))
-        if (len(p) == 0):
+        cursor = conn.cursor() 
+        # Use database
+        cursor.execute("USE hms") 
+        
+        
+        cursor.execute("select * from PATIENT where PATIENT_ID=%s", (inp_d,))
+        result = cursor.fetchone()
+        if  result is None:
             tkinter.messagebox.showerror(
                 "HOSPITAL DATABSE SYSTEM", "PATIENT RECORD NOT FOUND")
         else:
-            conn.execute('DELETE FROM PATIENT where PATIENT_ID=?', (inp_d,))
-            conn.execute('DELETE FROM CONTACT_NO WHERE PATIENT_ID=?', (inp_d,))
+            cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
+            cursor.execute('DELETE FROM PATIENT where PATIENT_ID=%s', (inp_d,))
+            cursor.execute('DELETE FROM CONTACT_NO WHERE PATIENT_ID=%s', (inp_d,))
+            cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
             tkinter.messagebox.showinfo(
                 "HOSPITAL DATABASE SYSTEM", "DETAILS DELETED FROM DATABASE")
             conn.commit()

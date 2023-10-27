@@ -7,7 +7,7 @@ import helper
 
 conn = mysql.connector.connect(**helper.db_config)
 print("DATABASE CONNECTION SUCCESSFUL")
-# Use database
+
 
 
 #Class for BOOKING APPOINTMENT   
@@ -149,15 +149,18 @@ class DEL_AP:
 
     #FUNCTION TO DELETE DATA IN APPOINTMENT FORM      
     def DELETE_AP(self):        
-        global inp_d
+        global conn,inp_d
         inp_d = str(self.de1_ap.get())
-        conn = sqlite3.connect("HospitalDB.db")
-        v=list(conn.execute("select * from appointment where AP_NO=?", (inp_d ,)))
-        if (len(v)==0):
-            tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM", "PATIENT APPOINTMENT NOT FIXED")     
+        cursor = conn.cursor() 
+        # Use database
+        cursor.execute("USE hms") 
+        cursor.execute("select * from appointment where AP_NO= %s", (inp_d ,))
+        result = cursor.fetchone()
+        if  result is None:
+          tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM", "PATIENT APPOINTMENT NOT FIXED")     
         else:
-            conn.execute('DELETE FROM APPOINTMENT where AP_NO=?',(inp_d ,))
-            tkinter.messagebox.showinfo("Hospital DATABASE SYSTEM", "PATIENT APPOINTMENT DELETED")
+            cursor.execute("DELETE FROM APPOINTMENT WHERE AP_NO=%s",(inp_d ,))
+        tkinter.messagebox.showinfo("Hospital DATABASE SYSTEM", "PATIENT APPOINTMENT DELETED")
         conn.commit()
         
 #CLASS FOR DISPLAY MENU FOR SEARCH APPOINTMENT          
@@ -190,14 +193,16 @@ class SEA_AP:
         
     #FUNCTION TO SEARCH DATA IN APPOINTMENT FORM   
     def SEARCH_AP(self):
-        global inp_s,entry,errorS,t,i,q,dis1,dis2,dis3,dis4,dis5,dis6,dis7,dis8,dis9,dis10,l1,l2,l3,l4,l5,l6,l7,l8,l9,l10
-        c1=conn.cursor()
+        global conn,inp_s,entry,errorS,t,i,q,dis1,dis2,dis3,dis4,dis5,dis6,dis7,dis8,dis9,dis10,l1,l2,l3,l4,l5,l6,l7,l8,l9,l10
+        
         ap=(self.entry.get())
-        p = list(c1.execute("select * from appointment where AP_DATE=?", (ap,)))
-        if (len(p) == 0):
+        cursor = conn.cursor()  
+        cursor.execute("select * from appointment where AP_DATE=%s", (ap,))
+        result = cursor.fetchone()
+        if  result is None:
             tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM","THERE'S NO APPOINTMENT BOOKED")
         else:
-            t=c1.execute('SELECT PATIENT_ID,NAME,AP_NO,EMP_ID,AP_DATE,AP_TIME FROM PATIENT NATURAL JOIN appointment where AP_DATE=?',(ap,))          
+            cursor.execute('SELECT PATIENT_ID,NAME,AP_NO,EMP_ID,AP_DATE,AP_TIME FROM PATIENT NATURAL JOIN appointment where AP_DATE=%s',(ap,))          
             for i in t:
                 self.l1 = Label(self.LoginFrame,text="PATIENT ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)
                 self.l1.grid(row=1,column=0)
@@ -222,6 +227,7 @@ class SEA_AP:
                 self.l5.grid(row=5,column=0)
                 self.dis5 = Label(self.LoginFrame,font="Helvetica 14 bold",bg=helper.bg,bd=2,text=i[5])
                 self.dis5.grid(row=5,column=1)
+                
 
 
   

@@ -164,12 +164,17 @@ class D_EMP:
         
     #FUNCTION TO DELETE DATA IN EMPLOYEE FORM 
     def DELETE_EMP(self):        
-        global inp_d
+        global conn, inp_d
         de = str(self.de1_emp.get())
-        conn = sqlite3.connect("HospitalDB.db")
-        p = list(conn.execute("select * from employee where EMP_ID=?", (de,)))
-        if (len(p) != 0):
-            conn.execute("DELETE from employee where EMP_ID=?", (de,))
+        cursor = conn.cursor() 
+        # Use database
+        cursor.execute("USE hms") 
+        cursor.execute("select * from employee where EMP_ID=%s", (de,))
+        result = cursor.fetchone()
+        if  result is not None:
+            cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
+            cursor.execute("DELETE from employee where EMP_ID=%s", (de,))
+            cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
             dme = tkinter.messagebox.showinfo("HOSPITAL DATABASE SYSTEM", "EMPLOYEE DATA DELETED")
             
         else:
