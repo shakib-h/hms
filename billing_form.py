@@ -64,7 +64,7 @@ class Billing:
         self.lblcode_t1.grid(row=3,column=1)
 
         
-        self.lblap = Label(self.LoginFrame,text="TREATMENT COST ₹",font="Helvetica 14 bold",bg=helper.bg,bd=22)
+        self.lblap = Label(self.LoginFrame,text="TREATMENT COST ",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblap.grid(row=4,column=0)
         self.lblap  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable=self.cost_t)
         self.lblap.grid(row=4,column=1)
@@ -79,7 +79,7 @@ class Billing:
         self.med_t1 = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable=self.med_q)
         self.med_t1.grid(row=3,column=3)
         
-        self.lblapd = Label(self.LoginFrame,text="MEDICINE PRICE ₹",font="Helvetica 14 bold",bg=helper.bg,bd=22)
+        self.lblapd = Label(self.LoginFrame,text="MEDICINE PRICE ",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblapd.grid(row=4,column=2)
         self.lblapd  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable=self.price)
         self.lblapd.grid(row=4,column=3)

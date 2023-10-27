@@ -193,6 +193,8 @@ class Patient:
         u10 = self.pat_address.get()
 
         cursor = conn.cursor()
+         # Use database
+        cursor.execute("USE hms")
 
         # Check if the patient ID exists
         cursor.execute("SELECT * FROM PATIENT WHERE PATIENT_ID = %s", (u1,))
@@ -200,8 +202,8 @@ class Patient:
 
         if result is not None:
             # Update data in PATIENT table
-            cursor.execute("UPDATE PATIENT SET NAME = %s, SEX = %s, DOB = %s, BLOOD_GROUP = %s, ADDRESS = %s, CONSULT_TEAM = %s, EMAIL = %s WHERE PATIENT_ID = %s",
-                           (u2, u3, u4, u5, u10, u9, u8, u1))
+            cursor.execute("UPDATE PATIENT SET NAME = %s, SEX = %s, DOB = %s, BLOOD_GROUP = %s, ADDRESS = %s, CONSULT_TEAM = %s, EMAIL = %s,PHONE=%s, ALT_PHONE=%s WHERE PATIENT_ID = %s",
+                           (u2, u3, u4, u5, u10, u9, u8, u6, u7, u1))
 
             # Update data in CONTACT_NO table
             cursor.execute(

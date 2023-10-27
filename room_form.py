@@ -41,7 +41,7 @@ class Room:
         self.lblpatid.grid(row=0,column=0)
         self.lblpatid  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.P_id)
         self.lblpatid.grid(row=0,column=1)
-        self.room_t1= Label(self.LoginFrame,text="ROOM TYPE\nSINGLE ROOM: Rs 4500\nTWIN SHARING : Rs2500\nTRIPLE SHARING: Rs2000\n",font="Helvetica 14 bold",bg=helper.bg,bd=22)
+        self.room_t1= Label(self.LoginFrame,text="ROOM TYPE\nSINGLE ROOM: 4500\nTWIN SHARING : 2500\nTRIPLE SHARING: 2000\n",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.room_t1.grid(row=1,column=0)
         self.room_t1 = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.room_t)
         self.room_t1.grid(row=1,column=1)
@@ -124,9 +124,9 @@ class Room:
         cursor.execute("USE hms")  
         
         cursor.execute("Select * from ROOM where PATIENT_ID=%s AND ROOM_NO=%s",(r1,r3,))
-        result = cursor.fetchone()
+        result = cursor.fetchall()
         
-        if  result is not None:
+        if  result is None:
         
             tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM", "PATIENT IS NOT ALLOCATED A ROOM")
 
