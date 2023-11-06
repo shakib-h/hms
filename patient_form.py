@@ -29,7 +29,7 @@ class Patient:
         self.pat_name = StringVar()
         self.pat_dob = StringVar()
         self.pat_address = StringVar()
-        self.pat_sex = StringVar()
+        self.pat_gender = StringVar()
         self.pat_BG = StringVar()
         self.pat_email = StringVar()
         self.pat_contact = StringVar()
@@ -63,12 +63,12 @@ class Patient:
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_name)
         self.lblPatname.grid(row=1, column=1)
 
-        self.lblsex = Label(self.LoginFrame, text="SEX",
+        self.lblgender = Label(self.LoginFrame, text="GENDER",
                             font="Helvetica 14 bold", bg="cadet blue", bd=22)
-        self.lblsex.grid(row=2, column=0)
-        self.lblsex = Entry(
-            self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_sex)
-        self.lblsex.grid(row=2, column=1)
+        self.lblgender.grid(row=2, column=0)
+        self.lblgender = Entry(
+            self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_gender)
+        self.lblgender.grid(row=2, column=1)
 
         self.lblDOB = Label(self.LoginFrame, text="DOB (YYYY-MM-DD)",
                             font="Helvetica 14 bold", bg="cadet blue", bd=22)
@@ -146,7 +146,7 @@ class Patient:
         global conn
         p1 = self.pat_ID.get()
         p2 = self.pat_name.get()
-        p3 = self.pat_sex.get()
+        p3 = self.pat_gender.get()
         p4 = self.pat_BG.get()
         p5 = self.pat_dob.get()
         p6 = self.pat_contact.get()
@@ -168,7 +168,7 @@ class Patient:
                 "HOSPITAL DATABASE SYSTEM", "PATIENT_ID ALREADY EXISTS")
         else:
             # Insert data into PATIENT table
-            cursor.execute("INSERT INTO PATIENT (PATIENT_ID, NAME, SEX, BLOOD_GROUP, DOB, ADDRESS, CONSULT_TEAM, EMAIL, PHONE, ALT_PHONE) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+            cursor.execute("INSERT INTO PATIENT (PATIENT_ID, NAME, GENDER, BLOOD_GROUP, DOB, ADDRESS, CONSULT_TEAM, EMAIL, PHONE, ALT_PHONE) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                            (p1, p2, p3, p4, p5, p8, p9, p10, p6, p7))
 
             # Insert data into CONTACT_NO table
@@ -182,7 +182,7 @@ class Patient:
         global conn
         u1 = self.pat_ID.get()
         u2 = self.pat_name.get()
-        u3 = self.pat_sex.get()
+        u3 = self.pat_gender.get()
         u4 = self.pat_dob.get()
         u5 = self.pat_BG.get()
         u6 = self.pat_contact.get()
@@ -201,7 +201,7 @@ class Patient:
 
         if result is not None:
             # Update data in PATIENT table
-            cursor.execute("UPDATE PATIENT SET NAME = %s, SEX = %s, DOB = %s, BLOOD_GROUP = %s, ADDRESS = %s, CONSULT_TEAM = %s, EMAIL = %s,PHONE=%s, ALT_PHONE=%s WHERE PATIENT_ID = %s",
+            cursor.execute("UPDATE PATIENT SET NAME = %s, GENDER = %s, DOB = %s, BLOOD_GROUP = %s, ADDRESS = %s, CONSULT_TEAM = %s, EMAIL = %s,PHONE=%s, ALT_PHONE=%s WHERE PATIENT_ID = %s",
                            (u2, u3, u4, u5, u10, u9, u8, u6, u7, u1))
 
             # Update data in CONTACT_NO table
@@ -351,7 +351,7 @@ class SMenu:
                     self.LoginFrame, font="Helvetica 14 bold", bd=2, bg="cadet blue", text=i[1])
                 self.dis2.grid(row=2, column=1)
 
-                self.l3 = Label(self.LoginFrame, text="SEX",
+                self.l3 = Label(self.LoginFrame, text="GENDER",
                                 font="Helvetica 14 bold", bg="cadet blue", bd=22)
                 self.l3.grid(row=3, column=0)
                 self.dis3 = Label(

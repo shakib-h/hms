@@ -24,7 +24,7 @@ class Employee:
         
         self.emp_ID=StringVar()
         self.emp_name=StringVar()
-        self.emp_sex=StringVar()
+        self.emp_gender=StringVar()
         self.emp_age=IntVar()
         self.emp_type=StringVar()
         self.emp_salary=IntVar()
@@ -53,9 +53,9 @@ class Employee:
         self.lblempname  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_name)
         self.lblempname.grid(row=1,column=1)
 
-        self.lblsex = Label(self.LoginFrame,text="SEX",font="Helvetica 14 bold",bg=helper.bg,bd=22)
-        self.lblsex.grid(row=2,column=0)
-        self.etype1 =Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_sex)
+        self.lblgender = Label(self.LoginFrame,text="GENDER",font="Helvetica 14 bold",bg=helper.bg,bd=22)
+        self.lblgender.grid(row=2,column=0)
+        self.etype1 =Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.emp_gender)
         self.etype1.grid(row=2,column=1)
         
 
@@ -109,7 +109,7 @@ class Employee:
         global conn, e1,e2,e3,e4,e5,e6,e7,e8,e9,var
         e1=(self.emp_ID.get())
         e2=(self.emp_name.get())
-        e3=(self.emp_sex.get())
+        e3=(self.emp_gender.get())
         e4=(self.emp_age.get())
         e5=(self.emp_type.get())
         e6=(self.emp_salary.get())
