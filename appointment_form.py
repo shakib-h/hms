@@ -196,7 +196,8 @@ class SEA_AP:
         global conn,inp_s,entry,errorS,t,i,q,dis1,dis2,dis3,dis4,dis5,dis6,dis7,dis8,dis9,dis10,l1,l2,l3,l4,l5,l6,l7,l8,l9,l10
         
         ap=(self.entry.get())
-        cursor = conn.cursor()  
+        cursor = conn.cursor()
+        cursor.execute("USE hms")  
         cursor.execute("select * from appointment where AP_DATE=%s", (ap,))
         result = cursor.fetchone()
         if  result is None:
