@@ -85,7 +85,7 @@ class Billing:
         self.lblapd.grid(row=4,column=3)
 
         #===========BUTTONS=============    
-        self.button3 = Button(self.LoginFrame2, text="UPDATE DATA",width =15,font="Helvetica 14 bold",bg=helper.bg,command= self.UPDATE_DATA)
+        self.button3 = Button(self.LoginFrame2, text="SAVE DATA",width =15,font="Helvetica 14 bold",bg=helper.bg,command= self.UPDATE_DATA)
         self.button3.grid(row=3,column=2)
         
         self.button3 = Button(self.LoginFrame2, text="GENERATE BILL",width =15,font="Helvetica 14 bold",bg=helper.bg,command= self.GEN_BILL)

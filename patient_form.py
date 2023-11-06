@@ -176,8 +176,7 @@ class Patient:
                 "INSERT INTO CONTACT_NO (PATIENT_ID, CONTACTNO, ALT_CONTACT) VALUES (%s, %s, %s)", (p1, p6, p7))
 
             conn.commit()
-        tkinter.messagebox.showinfo(
-            "HOSPITAL DATABASE SYSTEM", "DETAILS INSERTED INTO DATABASE")
+        tkinter.messagebox.showinfo("HOSPITAL DATABASE SYSTEM", "DETAILS INSERTED INTO DATABASE")
 
     def UPDATE_PAT(self):
         global conn
