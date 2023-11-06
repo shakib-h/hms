@@ -326,17 +326,24 @@ class SMenu:
 
     # FUNCTION TO SEARCH DATA IN PATIENT FORM
     def SEARCH_PAT(self):
-        global inp_s, s_pid, errorS, t, i, q, dis1, dis2, dis3, dis4, dis5, dis6, dis7, dis8, dis9, dis10, l1, l2, l3, l4, l5, l6, l7, l8, l9, l10
-        c1 = conn.cursor()
+        global conn, inp_s, s_pid, errorS, t, i, q, dis1, dis2, dis3, dis4, dis5, dis6, dis7, dis8, dis9, dis10, l1, l2, l3, l4, l5, l6, l7, l8, l9, l10
+
+        cursor = conn.cursor()
+        # Use database
+        cursor.execute("USE hms")
+
         inp_s = (self.s_pid.get())
-        p = list(conn.execute('select * from PATIENT where PATIENT_ID=?', (inp_s,)))
-        if (len(p) == 0):
+        # Check if the patient ID already exists
+        cursor.execute("SELECT * FROM PATIENT WHERE PATIENT_ID = %s", (inp_s,))
+        result = cursor.fetchone()
+        if  result is None:
             tkinter.messagebox.showerror(
                 "HOSPITAL DATABSE SYSTEM", "PATIENT RECORD NOT FOUND")
 
         else:
-            t = c1.execute(
-                'SELECT * FROM PATIENT NATURAL JOIN CONTACT_NO where PATIENT_ID=?', (inp_s,))
+            cursor.execute(
+                'SELECT * FROM PATIENT NATURAL JOIN CONTACT_NO where PATIENT_ID=%s', (inp_s,))
+            t = cursor.fetchall()
             for i in t:
                 self.l1 = Label(self.LoginFrame, text="PATIENT ID",
                                 font="Helvetica 14 bold", bg="cadet blue", bd=22)

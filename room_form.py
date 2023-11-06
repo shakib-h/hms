@@ -166,14 +166,18 @@ class S_Room:
     #FUNCTION TO SEARCH DATA IN ROOM ALLOCATION FORM
     def ROOM_DISPLAY(self):
         global pat_rm,lr1,dis1,lr2,dis2,c1,i,conn,c1,Pr_id
-        conn = sqlite3.connect("HospitalDB.db")
-        c1=conn.cursor()        
+        cursor = conn.cursor()
+        cursor.execute("USE hms")
+
+
         pat_rm=(self.Pr_id.get())
-        p=list(c1.execute('select * from  ROOM  where PATIENT_ID=?',(pat_rm,)))
-        if (len(p)==0):
+        cursor.execute('select * from  ROOM  where PATIENT_ID=%s',(pat_rm,))
+        result = cursor.fetchone()
+        if (result is None):
             tkinter.messagebox.showerror("HOSPITAL DATABASE SYSTEM","PATIENT NOT ALLOCATED ROOM")
         else:
-            t=c1.execute('SELECT PATIENT_ID,NAME,ROOM_NO,ROOM_TYPE FROM ROOM NATURAL JOIN PATIENT where PATIENT_ID=?',(pat_rm,));
+            cursor.execute('SELECT PATIENT_ID,NAME,ROOM_NO,ROOM_TYPE FROM ROOM NATURAL JOIN PATIENT where PATIENT_ID=%s',(pat_rm,))
+            t=cursor.fetchall()
             for i in t:
             
                 self.l1 = Label(self.LoginFrame,text="PATIENT ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)

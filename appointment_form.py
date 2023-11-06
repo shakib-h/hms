@@ -203,6 +203,7 @@ class SEA_AP:
             tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM","THERE'S NO APPOINTMENT BOOKED")
         else:
             cursor.execute('SELECT PATIENT_ID,NAME,AP_NO,EMP_ID,AP_DATE,AP_TIME FROM PATIENT NATURAL JOIN appointment where AP_DATE=%s',(ap,))          
+            t=cursor.fetchall()
             for i in t:
                 self.l1 = Label(self.LoginFrame,text="PATIENT ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)
                 self.l1.grid(row=1,column=0)
