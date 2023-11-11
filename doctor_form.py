@@ -10,7 +10,7 @@ print("DATABASE CONNECTION SUCCESSFUL")
 
 
 
-#Class for EMPLOYEE REGISTRATION 
+#Class for DOCTOR REGISTRATION 
 class Doctors:
     def __init__(self,master):
         self.master = master
@@ -135,7 +135,7 @@ class Doctors:
         self.app = D_DOC(self.newWindow)
 
 
-#CLASS FOR DISPLAY MENU FOR DELETE EMPLOYEE
+#CLASS FOR DISPLAY MENU FOR DELETE DOCTOR
 class D_DOC:
     def __init__(self,master):    
         global de1_DOC,de
@@ -162,7 +162,7 @@ class D_DOC:
         self.DeleteB = Button(self.LoginFrame2, text="DELETE",width =10,font="Helvetica 14 bold",bg=helper.bg,command = self.DELETE_DOC)
         self.DeleteB.grid(row=3,column=1)
         
-    #FUNCTION TO DELETE DATA IN EMPLOYEE FORM 
+    #FUNCTION TO DELETE DATA IN DOCTOR FORM 
     def DELETE_DOC(self):        
         global conn, inp_d
         de = str(self.de1_DOC.get())
@@ -175,8 +175,8 @@ class D_DOC:
             cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
             cursor.execute("DELETE from doctors where doc_ID=%s", (de,))
             cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
-            dme = tkinter.messagebox.showinfo("HOSPITAL DATABASE SYSTEM", "EMPLOYEE DATA DELETED")
+            dme = tkinter.messagebox.showinfo("HOSPITAL DATABASE SYSTEM", "DOCTOR DATA DELETED")
             
         else:
-            error = tkinter.messagebox.showerror("HOSPITAL DATABASE SYSTEM", "EMPLOYEE DATA DOESN'T EXIST")
+            error = tkinter.messagebox.showerror("HOSPITAL DATABASE SYSTEM", "DOCTOR DATA DOESN'T EXIST")
         conn.commit()   
