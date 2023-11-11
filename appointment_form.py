@@ -23,7 +23,7 @@ class Appointment:
         #=============ATTRIBUTES===========
         
         self.pat_ID=IntVar()
-        self.emp_ID=StringVar()
+        self.doc_ID=StringVar()
         self.ap_no=StringVar()
         self.ap_time=StringVar()
         self.ap_date=StringVar()
@@ -46,7 +46,7 @@ class Appointment:
         
         self.lbldid = Label(self.LoginFrame,text="DOCTOR ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lbldid.grid(row=1,column=0)
-        self.lbldid  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable=self.emp_ID )
+        self.lbldid  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable=self.doc_ID )
         self.lbldid.grid(row=1,column=1)
 
     
@@ -92,7 +92,7 @@ class Appointment:
     def INSERT_AP(self):
         global conn,e1,e2,e3,e4,e5,e6,var
         e1=(self.pat_ID.get())
-        e2=(self.emp_ID.get())
+        e2=(self.doc_ID.get())
         e3=(self.ap_no.get())
         e4=(self.ap_time.get())
         e5=(self.ap_date.get())
@@ -203,7 +203,7 @@ class SEA_AP:
         if  result is None:
             tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM","THERE'S NO APPOINTMENT BOOKED")
         else:
-            cursor.execute('SELECT PATIENT_ID,NAME,AP_NO,EMP_ID,AP_DATE,AP_TIME FROM PATIENT NATURAL JOIN appointment where AP_DATE=%s',(ap,))          
+            cursor.execute('SELECT PATIENT_ID,NAME,AP_NO,doc_ID,AP_DATE,AP_TIME FROM PATIENT NATURAL JOIN appointment where AP_DATE=%s',(ap,))          
             t=cursor.fetchall()
             for i in t:
                 self.l1 = Label(self.LoginFrame,text="PATIENT ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)

@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter import font
 from patient_form import Patient
 from room_form import Room
-from employee_form import Employee
+from doctor_form import Doctors
 from appointment_form import Appointment
 from billing_form import Billing
 import helper
@@ -37,7 +37,7 @@ class Menu:
         self.button2 = Button(self.LoginFrame, text="2.ROOM ALLOCATION",width =30,font="Helvetica 14 bold",bg=helper.bg,command=self.Room_Allocation)
         self.button2.grid(row=3,column=0,pady=10)
         
-        self.button3 = Button(self.LoginFrame, text="3.EMPLOYEE REGISTRATION",width =30,font="Helvetica 14 bold",bg=helper.bg,command=self.Employee_Reg)
+        self.button3 = Button(self.LoginFrame, text="3.DOCTOR REGISTRATION",width =30,font="Helvetica 14 bold",bg=helper.bg,command=self.Doctors_Reg)
         self.button3.grid(row=5,column=0,pady=10)
         
         self.button4 = Button(self.LoginFrame, text="4.BOOK APPOINTMENT",width =30,font="Helvetica 14 bold",bg=helper.bg,command=self.Appointment_Form)
@@ -65,10 +65,10 @@ class Menu:
         self.newWindow = Toplevel(self.master)
         self.app = Room(self.newWindow)
         
-    #Function to open Employee Registration Window 
-    def Employee_Reg(self):
+    #Function to open Doctors Registration Window 
+    def Doctors_Reg(self):
         self.newWindow = Toplevel(self.master)
-        self.app = Employee(self.newWindow)
+        self.app = Doctors(self.newWindow)
         
     #Function to open Appointment Window
     def Appointment_Form(self):

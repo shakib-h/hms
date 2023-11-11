@@ -8,6 +8,7 @@ c = conn.cursor()
 
 # Create database
 c.execute("CREATE DATABASE IF NOT EXISTS hms")
+print("DATABASE CREATED")
 
 # Use database
 c.execute("USE hms")
@@ -18,7 +19,7 @@ c.execute("SET FOREIGN_KEY_CHECKS = 0")
 # Drop tables if they exist
 c.execute("DROP TABLE IF EXISTS PATIENT")
 c.execute("DROP TABLE IF EXISTS CONTACT_NO")
-c.execute("DROP TABLE IF EXISTS employee")
+c.execute("DROP TABLE IF EXISTS doctors")
 c.execute("DROP TABLE IF EXISTS TREATMENT")
 c.execute("DROP TABLE IF EXISTS MEDICINE")
 c.execute("DROP TABLE IF EXISTS ROOM")
@@ -53,10 +54,10 @@ c.execute("""CREATE TABLE CONTACT_NO (
 
 print("CONTACT_NO TABLE CREATED SUCCESSFULLY")
 
-# Create employee table
-c.execute("""CREATE TABLE employee (
-    EMP_ID VARCHAR(10) PRIMARY KEY,
-    EMP_NAME VARCHAR(20) NOT NULL,
+# Create DOCTOR table
+c.execute("""CREATE TABLE DOCTORS (
+    DOC_ID VARCHAR(10) PRIMARY KEY,
+    DOC_NAME VARCHAR(20) NOT NULL,
     GENDER VARCHAR(10) NOT NULL,
     AGE INT(5) NOT NULL,
     DESIG VARCHAR(20) NOT NULL,
@@ -66,7 +67,7 @@ c.execute("""CREATE TABLE employee (
     PHONE VARCHAR(12)
 )""")
 
-print("EMPLOYEE TABLE CREATED SUCCESSFULLY")
+print("DOCTOR TABLE CREATED SUCCESSFULLY")
 
 # Create TREATMENT table
 c.execute("""CREATE TABLE TREATMENT (
@@ -106,13 +107,13 @@ print("ROOM TABLE CREATED SUCCESSFULLY")
 # Create APPOINTMENT table
 c.execute("""CREATE TABLE APPOINTMENT (
     PATIENT_ID INT(20) NOT NULL,
-    EMP_ID VARCHAR(10) NOT NULL,
+    DOC_ID VARCHAR(10) NOT NULL,
     AP_NO VARCHAR(10) PRIMARY KEY,
     AP_TIME TIME,
     AP_DATE DATE,
     DESCRIPTION VARCHAR(100),
     FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID),
-    FOREIGN KEY(EMP_ID) REFERENCES employee(EMP_ID)
+    FOREIGN KEY(doc_ID) REFERENCES doctors(doc_ID)
 )""")
 
 # Create Billing table
