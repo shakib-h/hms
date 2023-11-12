@@ -28,7 +28,7 @@ class Menu:
         self.lblTitle = Label(self.frame,text = "MAIN MENU", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=50)
         
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
         #===========BUTTONS============= 
         self.button1 = Button(self.LoginFrame,text = "1.PATIENT REGISTRATION", width =30,font="Helvetica 14 bold",bg=helper.bg,command=self.Patient_Reg)       

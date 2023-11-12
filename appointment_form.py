@@ -33,10 +33,10 @@ class Appointment:
         self.lblTitle = Label(self.frame,text = "APPOINTMENT FORM", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=50)
         #==============FRAME==========
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
         
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         #===========LABELS=============          
         self.lblpid = Label(self.LoginFrame,text="PATIENT ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)
@@ -134,9 +134,9 @@ class DEL_AP:
         self.lblTitle = Label(self.frame,text = "DELETE APPOINTMENT WINDOW", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=50)
         #==============FRAME==========
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         #===========LABELS=============          
         self.lblpatid = Label(self.LoginFrame,text="ENTER APPOINTMENT NO TO DELETE",font="Helvetica 14 bold",bg=helper.bg,bd=22)
@@ -177,9 +177,9 @@ class SEA_AP:
         self.lblTitle = Label(self.frame,text = "SEARCH APPOINTMENT WINDOW", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=25)
         #==============FRAME==========
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         
         #===========LABELS=============          

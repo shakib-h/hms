@@ -34,21 +34,21 @@ class Doctors:
 
 
         #===============TITLE==========
-        self.lblTitle = Label(self.frame,text = "EMPLOYEE REGISTRATION FORM", font="Helvetica 20 bold",bg=helper.bg)
+        self.lblTitle = Label(self.frame,text = "DOCTOR REGISTRATION FORM", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=50)
         #==============FRAME==========
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
         
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         #===========LABELS=============          
-        self.lblempid = Label(self.LoginFrame,text="EMPLOYEE ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)
+        self.lblempid = Label(self.LoginFrame,text="DOCTOR ID",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblempid.grid(row=0,column=0)
         self.lblempid  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.doc_ID)
         self.lblempid.grid(row=0,column=1)
         
-        self.lblempname = Label(self.LoginFrame,text="EMPLOYEE NAME",font="Helvetica 14 bold",bg=helper.bg,bd=22)
+        self.lblempname = Label(self.LoginFrame,text="DOCTOR NAME",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblempname.grid(row=1,column=0)
         self.lblempname  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.doc_name)
         self.lblempname.grid(row=1,column=1)
@@ -64,7 +64,7 @@ class Doctors:
         self.lblage  = Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.doc_age)
         self.lblage.grid(row=3,column=1)
         
-        self.etype1=Label(self.LoginFrame,text="EMPLOYEE DESIGNATION",font="Helvetica 14 bold",bg=helper.bg,bd=22)
+        self.etype1=Label(self.LoginFrame,text="DOCTOR DESIGNATION",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.etype1.grid(row=4,column=0)
         self.etype1 =Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.doc_type)
         self.etype1.grid(row=4,column=1)
@@ -103,7 +103,7 @@ class Doctors:
     def Exit(self):            
         self.master.destroy()
         
-    #FUNCTION TO INSERT DATA IN EMPLOYEE FORM
+    #FUNCTION TO INSERT DATA IN DOCTOR FORM
         
     def INSERT_DOC(self):
         global conn, e1,e2,e3,e4,e5,e6,e7,e8,e9,var
@@ -119,14 +119,14 @@ class Doctors:
         cursor = conn.cursor()  
           # Use database
         cursor.execute("USE hms")  
-        cursor.execute("SELECT * FROM EMPLOYEE WHERE doc_ID = %s", (e1,))
+        cursor.execute("SELECT * FROM DOCTOR WHERE doc_ID = %s", (e1,))
         result = cursor.fetchone()
         
         if  result is not None:
-             tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM", "EMPLOYEE ID ALREADY EXISTS")     
+             tkinter.messagebox.showerror("HOSPITAL DATABSE SYSTEM", "DOCTOR ID ALREADY EXISTS")     
         else:
             cursor.execute("INSERT INTO doctors VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)",(e1,e2,e3,e4,e5,e6,e7,e8,e9,))
-            tkinter.messagebox.showinfo("HOSPITAL DATABASE SYSTEM", "EMPLOYEE DATA ADDED")
+            tkinter.messagebox.showinfo("HOSPITAL DATABASE SYSTEM", "DOCTOR DATA ADDED")
         conn.commit()
                 
     #FUNCTION TO OPEN DELETE PATIENT DISPLAY WINDOW
@@ -146,15 +146,15 @@ class D_DOC:
         self.frame = Frame(self.master,bg=helper.bg)
         self.frame.pack()
         self.de1_DOC=StringVar()
-        self.lblTitle = Label(self.frame,text = "DELETE EMPLOYEE WINDOW", font="Helvetica 20 bold",bg=helper.bg)
+        self.lblTitle = Label(self.frame,text = "DELETE DOCTOR WINDOW", font="Helvetica 20 bold",bg=helper.bg)
         self.lblTitle.grid(row =0 ,column = 0,columnspan=2,pady=50)
         #==============FRAME==========
-        self.LoginFrame = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame.grid(row=1,column=0)
-        self.LoginFrame2 = Frame(self.frame,width=400,height=80,relief="ridge",bg=helper.bg,bd=20)
+        self.LoginFrame2 = Frame(self.frame,width=400,height=80,bg=helper.bg,bd=20)
         self.LoginFrame2.grid(row=2,column=0)
         #===========LABELS=============          
-        self.lblpatid = Label(self.LoginFrame,text="ENTER EMPLOYEE ID TO DELETE",font="Helvetica 14 bold",bg=helper.bg,bd=22)
+        self.lblpatid = Label(self.LoginFrame,text="ENTER DOCTOR ID TO DELETE",font="Helvetica 14 bold",bg=helper.bg,bd=22)
         self.lblpatid.grid(row=0,column=0)
         self.lblpatid= Entry(self.LoginFrame,font="Helvetica 14 bold",bd=2,textvariable= self.de1_DOC)
         self.lblpatid.grid(row=0,column=1)

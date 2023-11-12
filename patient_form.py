@@ -19,8 +19,8 @@ class Patient:
         self.master = master
         self.master.title("HOSPITAL MANAGEMENT SYSTEM")
         self.master.geometry("1500x700+0+0")
-        self.master.config(bg="cadet blue")
-        self.frame = Frame(self.master, bg="cadet blue")
+        self.master.config(bg=helper.bg)
+        self.frame = Frame(self.master, bg=helper.bg)
         self.frame.pack()
 
         # =============ATTRIBUTES===========
@@ -38,82 +38,82 @@ class Patient:
 
         # ===============TITLE==========
         self.lblTitle = Label(self.frame, text="PATIENT REGISTRATION FORM",
-                              font="Helvetica 20 bold", bg="cadet blue")
+                              font="Helvetica 20 bold", bg=helper.bg)
         self.lblTitle.grid(row=0, column=0, columnspan=2, pady=50)
         # ==============FRAME==========
         self.LoginFrame = Frame(
-            self.frame, width=400, height=80, relief="ridge", bg="cadet blue", bd=20)
+            self.frame, width=400, height=80,  bg=helper.bg, bd=20)
         self.LoginFrame.grid(row=1, column=0)
 
         self.LoginFrame2 = Frame(
-            self.frame, width=400, height=80, relief="ridge", bg="cadet blue", bd=20)
+            self.frame, width=400, height=80,  bg=helper.bg, bd=20)
         self.LoginFrame2.grid(row=2, column=0)
         # ===========LABELS=============
         self.lblpatid = Label(self.LoginFrame, text="PATIENT ID",
-                              font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                              font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lblpatid.grid(row=0, column=0)
         self.lblpatid = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_ID)
         self.lblpatid.grid(row=0, column=1)
 
         self.lblPatname = Label(self.LoginFrame, text="PATIENT NAME",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lblPatname.grid(row=1, column=0)
         self.lblPatname = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_name)
         self.lblPatname.grid(row=1, column=1)
 
         self.lblgender = Label(self.LoginFrame, text="GENDER",
-                            font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                            font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lblgender.grid(row=2, column=0)
         self.lblgender = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_gender)
         self.lblgender.grid(row=2, column=1)
 
         self.lblDOB = Label(self.LoginFrame, text="DOB (YYYY-MM-DD)",
-                            font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                            font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lblDOB.grid(row=3, column=0)
         self.lblDOB = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_dob)
         self.lblDOB.grid(row=3, column=1)
 
         self.lblbgrp = Label(self.LoginFrame, text="BLOOD GROUP",
-                             font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                             font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lblbgrp.grid(row=4, column=0)
         self.lblbgrp = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_BG)
         self.lblbgrp.grid(row=4, column=1)
 
         self.lblCon = Label(self.LoginFrame, text="CONTACT NUMBER",
-                            font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                            font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lblCon.grid(row=0, column=2)
         self.lblCon = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_contact)
         self.lblCon.grid(row=0, column=3)
 
         self.lblAlt = Label(self.LoginFrame, text="ALTERNATE CONTACT",
-                            font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                            font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lblAlt.grid(row=1, column=2)
         self.lblAlt = Entry(self.LoginFrame, font="Helvetica 14 bold",
                             bd=2, textvariable=self.pat_contactalt)
         self.lblAlt.grid(row=1, column=3)
 
         self.lbleid = Label(self.LoginFrame, text="EMAIL",
-                            font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                            font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lbleid.grid(row=2, column=2)
         self.lbleid = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_email)
         self.lbleid.grid(row=2, column=3)
 
         self.lbldoc = Label(self.LoginFrame, text="CONSULTING TEAM / DOCTOR",
-                            font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                            font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lbldoc.grid(row=3, column=2)
         self.lbldoc = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_CT)
         self.lbldoc.grid(row=3, column=3)
 
         self.lbladd = Label(self.LoginFrame, text="ADDRESS",
-                            font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                            font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lbladd.grid(row=4, column=2)
         self.lbladd = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.pat_address)
@@ -121,23 +121,23 @@ class Patient:
 
         # ===========BUTTONS=============
         self.button2 = Button(self.LoginFrame2, text="SUBMIT", width=10,
-                              font="Helvetica 14 bold", bg="cadet blue", command=self.INSERT_PAT)
+                              font="Helvetica 14 bold", bg=helper.bg, command=self.INSERT_PAT)
         self.button2.grid(row=3, column=1)
 
         self.button3 = Button(self.LoginFrame2, text="UPDATE", width=10,
-                              font="Helvetica 14 bold", bg="cadet blue", command=self.UPDATE_PAT)
+                              font="Helvetica 14 bold", bg=helper.bg, command=self.UPDATE_PAT)
         self.button3.grid(row=3, column=2)
 
         self.button4 = Button(self.LoginFrame2, text="DELETE", width=10,
-                              font="Helvetica 14 bold", bg="cadet blue", command=self.D_DISPLAY)
+                              font="Helvetica 14 bold", bg=helper.bg, command=self.D_DISPLAY)
         self.button4.grid(row=3, column=3)
 
         self.button5 = Button(self.LoginFrame2, text="SEARCH", width=10,
-                              font="Helvetica 14 bold", bg="cadet blue", command=self.S_DISPLAY)
+                              font="Helvetica 14 bold", bg=helper.bg, command=self.S_DISPLAY)
         self.button5.grid(row=3, column=4)
 
         self.button6 = Button(self.LoginFrame2, text="EXIT", width=10,
-                              font="Helvetica 14 bold", bg="cadet blue", command=self.Exit)
+                              font="Helvetica 14 bold", bg=helper.bg, command=self.Exit)
         self.button6.grid(row=3, column=5)
 
     # FUNCTION TO INSERT DATA IN PATIENT FORM
@@ -238,30 +238,30 @@ class DMenu:
         self.master = master
         self.master.title("HOSPITAL MANAGEMENT SYSTEM")
         self.master.geometry("1500x700+0+0")
-        self.master.config(bg="cadet blue")
-        self.frame = Frame(self.master, bg="cadet blue")
+        self.master.config(bg=helper.bg)
+        self.frame = Frame(self.master, bg=helper.bg)
         self.frame.pack()
         self.del_pid = IntVar()
         self.lblTitle = Label(self.frame, text="DELETE WINDOW",
-                              font="Helvetica 20 bold", bg="cadet blue")
+                              font="Helvetica 20 bold", bg=helper.bg)
         self.lblTitle.grid(row=0, column=0, columnspan=2, pady=50)
         # ==============FRAME==========
         self.LoginFrame = Frame(
-            self.frame, width=400, height=80, relief="ridge", bg="cadet blue", bd=20)
+            self.frame, width=400, height=80,  bg=helper.bg, bd=20)
         self.LoginFrame.grid(row=1, column=0)
         self.LoginFrame2 = Frame(
-            self.frame, width=400, height=80, relief="ridge", bg="cadet blue", bd=20)
+            self.frame, width=400, height=80,  bg=helper.bg, bd=20)
         self.LoginFrame2.grid(row=2, column=0)
         # ===========LABELS=============
         self.lblpatid = Label(self.LoginFrame, text="ENTER PATIENT ID TO DELETE",
-                              font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                              font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lblpatid.grid(row=0, column=0)
         self.lblpatid = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.del_pid)
         self.lblpatid.grid(row=0, column=1)
 
         self.DeleteB = Button(self.LoginFrame2, text="DELETE", width=10,
-                              font="Helvetica 14 bold", bg="cadet blue", command=self.DELETE_PAT)
+                              font="Helvetica 14 bold", bg=helper.bg, command=self.DELETE_PAT)
         self.DeleteB.grid(row=3, column=1)
 
     # FUNCTION TO DELETE DATA IN PATIENT FORM
@@ -296,31 +296,31 @@ class SMenu:
         self.master = master
         self.master.title("HOSPITAL MANAGEMENT SYSTEM")
         self.master.geometry("1500x700+0+0")
-        self.master.config(bg="cadet blue")
-        self.frame = Frame(self.master, bg="cadet blue")
+        self.master.config(bg=helper.bg)
+        self.frame = Frame(self.master, bg=helper.bg)
         self.frame.pack()
         self.s_pid = IntVar()
         self.lblTitle = Label(self.frame, text="SEARCH WINDOW",
-                              font="Helvetica 20 bold", bg="cadet blue")
+                              font="Helvetica 20 bold", bg=helper.bg)
         self.lblTitle.grid(row=0, column=0, columnspan=2, pady=25)
         # ==============FRAME==========
         self.LoginFrame = Frame(
-            self.frame, width=400, height=80, relief="ridge", bg="cadet blue", bd=20)
+            self.frame, width=400, height=80,  bg=helper.bg, bd=20)
         self.LoginFrame.grid(row=1, column=0)
         self.LoginFrame2 = Frame(
-            self.frame, width=400, height=80, relief="ridge", bg="cadet blue", bd=20)
+            self.frame, width=400, height=80,  bg=helper.bg, bd=20)
         self.LoginFrame2.grid(row=2, column=0)
 
         # ===========LABELS=============
         self.lblpatid = Label(self.LoginFrame, text="ENTER PATIENT ID TO SEARCH",
-                              font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                              font="Helvetica 14 bold", bg=helper.bg, bd=22)
         self.lblpatid.grid(row=0, column=0)
         self.lblpatid = Entry(
             self.LoginFrame, font="Helvetica 14 bold", bd=2, textvariable=self.s_pid)
         self.lblpatid.grid(row=0, column=1)
 
         self.SearchB = Button(self.LoginFrame2, text="SEARCH", width=10,
-                              font="Helvetica 14 bold", bg="cadet blue", command=self.SEARCH_PAT)
+                              font="Helvetica 14 bold", bg=helper.bg, command=self.SEARCH_PAT)
         self.SearchB.grid(row=0, column=1)
 
     # FUNCTION TO SEARCH DATA IN PATIENT FORM
@@ -345,71 +345,71 @@ class SMenu:
             t = cursor.fetchall()
             for i in t:
                 self.l1 = Label(self.LoginFrame, text="PATIENT ID",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l1.grid(row=1, column=0)
                 self.dis1 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg="cadet blue", text=i[0])
+                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg=helper.bg, text=i[0])
                 self.dis1.grid(row=1, column=1)
 
                 self.l2 = Label(self.LoginFrame, text="PATIENT NAME",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l2.grid(row=2, column=0)
                 self.dis2 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg="cadet blue", text=i[1])
+                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg=helper.bg, text=i[1])
                 self.dis2.grid(row=2, column=1)
 
                 self.l3 = Label(self.LoginFrame, text="GENDER",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l3.grid(row=3, column=0)
                 self.dis3 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bg="cadet blue", bd=2, text=i[2])
+                    self.LoginFrame, font="Helvetica 14 bold", bg=helper.bg, bd=2, text=i[2])
                 self.dis3.grid(row=3, column=1)
 
                 self.l4 = Label(self.LoginFrame, text="DOB (YYYY-MM-DD)",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l4.grid(row=4, column=0)
                 self.dis4 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bg="cadet blue", bd=2, text=i[4])
+                    self.LoginFrame, font="Helvetica 14 bold", bg=helper.bg, bd=2, text=i[4])
                 self.dis4.grid(row=4, column=1)
 
                 self.l5 = Label(self.LoginFrame, text="BLOOD GROUP",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l5.grid(row=5, column=0)
                 self.dis5 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bg="cadet blue", bd=2, text=i[3])
+                    self.LoginFrame, font="Helvetica 14 bold", bg=helper.bg, bd=2, text=i[3])
                 self.dis5.grid(row=5, column=1)
 
                 self.l6 = Label(self.LoginFrame, text="CONTACT NUMBER",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l6.grid(row=1, column=2)
                 self.dis6 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bg="cadet blue", bd=2, text=i[8])
+                    self.LoginFrame, font="Helvetica 14 bold", bg=helper.bg, bd=2, text=i[8])
                 self.dis6.grid(row=1, column=3)
 
                 self.l7 = Label(self.LoginFrame, text="ALTERNATE CONTACT",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l7.grid(row=2, column=2)
                 self.dis7 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg="cadet blue", text=i[9])
+                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg=helper.bg, text=i[9])
                 self.dis7.grid(row=2, column=3)
 
                 self.l8 = Label(self.LoginFrame, text="EMAIL",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l8.grid(row=3, column=2)
                 self.dis8 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg="cadet blue", text=i[7])
+                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg=helper.bg, text=i[7])
                 self.dis8.grid(row=3, column=3)
 
                 self.l9 = Label(self.LoginFrame, text="CONSULTING TEAM / DOCTOR",
-                                font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l9.grid(row=4, column=2)
                 self.dis9 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg="cadet blue", text=i[6])
+                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg=helper.bg, text=i[6])
                 self.dis9.grid(row=4, column=3)
 
                 self.l10 = Label(self.LoginFrame, text="ADDRESS",
-                                 font="Helvetica 14 bold", bg="cadet blue", bd=22)
+                                 font="Helvetica 14 bold", bg=helper.bg, bd=22)
                 self.l10.grid(row=5, column=2)
                 self.dis10 = Label(
-                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg="cadet blue", text=i[5])
+                    self.LoginFrame, font="Helvetica 14 bold", bd=2, bg=helper.bg, text=i[5])
                 self.dis10.grid(row=5, column=3)
